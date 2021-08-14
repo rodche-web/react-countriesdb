@@ -1,0 +1,29 @@
+.results-container {
+    padding: 20px;
+}
+
+.results-container h1 {
+    margin-bottom: 10px;
+}
+
+.results-list {
+    list-style-type: none;
+}
+
+.results-list li {
+    padding: 10px;
+    margin: 10px;
+}
+
+.results-list li:nth-child(2n) {
+    background-color: #ddd;
+}
+
+.result-link {
+    text-decoration: none;
+    color: black;
+}
+
+.result-link:hover {
+    text-decoration: underline;
+}

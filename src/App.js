@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomePage from './pages/HomePage';
+import CountryDetail from './pages/CountryDetail';
+import Header from './components/Header';
+
+const App = () => {
+    const [countriesList, setCountriesList] = useState([]);
+
+    const searchCountry = async name => {
+        try {
+            const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+            const data = await res.json();
+            setCountriesList(data)
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+
+    return (
+        <div>
+            <Header />
+            <Switch>
+                <Route path='/' exact><HomePage countriesList={countriesList} searchCountry={searchCountry} /></Route>
+                <Route path='/country/:name'><CountryDetail /></Route>
+            </Switch>
+        </div>
+    )
 }
 
-export default App;
+export default App
